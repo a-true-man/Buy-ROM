@@ -1,0 +1,907 @@
+/* --- הגדרות גלובליות ומשתני צבע --- */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+:root {
+    --primary-color: #007bff; /* כחול טכנולוגי */
+    --dark-color: #212529;    /* אפור כהה מאוד */
+    --light-color: #f8f9fa;   /* אפור בהיר לרקעים */
+    --text-color: #333;
+    --white-color: #ffffff;
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    direction: rtl;
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--light-color);
+    color: var(--text-color);
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+}
+
+/* --- כותרת עליונה וניווט --- */
+header {
+    background: var(--white-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+header .logo a {
+    text-decoration: none;
+    color: inherit;
+}
+
+header nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 25px;
+}
+
+header nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: var(--primary-color);
+}
+
+/* --- אזור ה-Hero (החלק הראשי בדף הבית) --- */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070) center center/cover;
+    color: var(--white-color);
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    max-width: 600px;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 12px 28px;
+    margin-top: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 500;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* --- אזור המוצרים/קושחאות --- */
+.firmware-section {
+    padding: 60px 0;
+}
+
+.firmware-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.firmware-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.firmware-card {
+    background: var(--white-color);
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.firmware-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.firmware-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.firmware-card-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.firmware-card-content h3 {
+    margin-top: 0;
+    color: var(--dark-color);
+}
+
+.firmware-card-content p {
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.firmware-card-content a {
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+    align-self: flex-start;
+}
+
+/* --- עיצוב דפי תוכן (אודות, מוצר) --- */
+.content-page {
+    background: var(--white-color);
+    padding: 40px;
+    margin: 40px auto;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+}
+
+/* --- דף מוצר ספציפי --- */
+.firmware-page-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.firmware-image-gallery img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+}
+
+.firmware-details h1 {
+    margin-top: 0;
+    font-size: 2.5rem;
+}
+
+.firmware-details .price {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.firmware-details h3 {
+    border-bottom: 2px solid var(--light-color);
+    padding-bottom: 10px;
+    margin-top: 30px;
+}
+
+.firmware-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.firmware-details ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.firmware-details ul li::before {
+    content: '✓'; /* סימן וי */
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* רספונסיביות לדף מוצר */
+@media (max-width: 768px) {
+    .firmware-page-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- כותרת תחתונה (Footer) --- */
+footer {
+    background: var(--dark-color);
+    color: var(--light-color);
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+
+/* --- עיצובים נוספים לדף המוצר (הערות וגלריה) --- */
+
+.extra-info-section, .gallery-section {
+    padding-top: 30px;
+    margin-top: 40px;
+    border-top: 1px solid #e9ecef;
+}
+
+.extra-info-section h2, .gallery-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.extra-info-section ul {
+    list-style: none;
+    padding-right: 0;
+}
+
+.extra-info-section ul li {
+    background: #f8f9fa;
+    padding: 10px 15px;
+    border-right: 4px solid var(--primary-color);
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+/* --- עיצוב גריד הגלריה --- */
+.image-gallery-grid {
+    display: grid;
+    /* יוצר 2-4 עמודות בהתאם לגודל המסך */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.image-gallery-grid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* מבטיח שהתמונה תמלא את כל المساحة בלי להתעוות */
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-gallery-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+
+/* --- עדכון לעימוד דף מוצר (עמודה לתמונה ועמודה לפרטים) --- */
+.firmware-page-layout {
+    display: grid;
+    /* החלוקה היא 50% לכל עמודה */
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* העמודה של המדיה (תמונה ראשית + גלריה) */
+.firmware-media {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-firmware-image {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+}
+
+/* --- עיצוב גלריית התמונות הממוזערות --- */
+.thumbnail-gallery h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--light-color);
+    padding-bottom: 10px;
+}
+
+.thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    
+    /* קובע גובה מקסימלי ומוסיף גלילה במידת הצורך */
+    max-height: 230px; /* גובה של 2 שורות בערך */
+    overflow-y: auto;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+.thumbnail-grid a {
+    display: block;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.thumbnail-grid img {
+    width: 100%;
+    height: 75px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail-grid a:hover img {
+    transform: scale(1.1);
+}
+
+
+/* --- עיצוב הלייטבוקס (התצוגה המקדימה הקופצת) --- */
+#lightbox {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#lightbox .lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+#lightbox img {
+    max-width: 100%;
+    max-height: 90vh; /* גובה מקסימלי של 90% מגובה המסך */
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+
+#lightbox .close, #lightbox .prev, #lightbox .next {
+    cursor: pointer;
+    position: absolute;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    transition: 0.3s;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+#lightbox .close:hover, #lightbox .prev:hover, #lightbox .next:hover {
+    color: #bbb;
+}
+
+#lightbox .close {
+    top: 15px;
+    right: 35px;
+    font-size: 45px;
+    padding: 0 10px;
+}
+
+#lightbox .prev, #lightbox .next {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#lightbox .prev {
+    right: 100%; /* שימוש ב-right כדי לתמוך ב-RTL */
+    margin-right: 10px;
+}
+
+#lightbox .next {
+    left: 100%; /* שימוש ב-left כדי לתמוך ב-RTL */
+    margin-left: 10px;
+}
+
+/* רספונסיביות לדף מוצר במסכים קטנים */
+@media (max-width: 768px) {
+    .firmware-page-layout {
+        grid-template-columns: 1fr; /* עמודה אחת במובייל */
+    }
+}
+
+/* --- עיצוב תפריט נפתח (Dropdown) --- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: right;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* --- עיצוב תיבת החיפוש --- */
+.search-container {
+    margin: 20px 0;
+}
+
+.home-search-container {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 500px;
+}
+
+#search-box {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; /* חשוב כדי שה-padding לא ישבור את העיצוב */
+}
+
+/* --- עיצוב כותרת הקטלוג --- */
+.catalog-header {
+    text-align: center;
+    padding: 40px 0 20px 0;
+}
+
+.catalog-header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+}
+
+/* --- עיצוב טבלת חבילות מחיר (Pricing Plans) --- */
+
+.pricing-section {
+    padding-top: 40px;
+    margin-top: 40px;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+}
+
+.pricing-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    align-items: center; /* גורם לחבילות להיות בגובה זהה */
+}
+
+.pricing-card {
+    background: var(--white-color);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    text-align: right;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* נדרש עבור התג "מומלץ" */
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.pricing-card h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.pricing-card .price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 10px 0;
+    color: var(--dark-color);
+}
+
+.pricing-card .price span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #6c757d;
+}
+
+.pricing-card p {
+    margin-bottom: 20px;
+    color: #495057;
+    min-height: 40px; /* שומר על גובה אחיד לתיאור */
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: right;
+}
+
+.pricing-card ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.pricing-card ul li:last-child {
+    border-bottom: none;
+}
+
+/* סימן 'וי' ליד כל תכונה */
+.pricing-card ul li::before {
+    content: '✓';
+    color: #28a745;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* כפתור משני לחבילות הרגילות */
+.cta-button.secondary {
+    background-color: #6c757d;
+}
+
+.cta-button.secondary:hover {
+    background-color: #5a6268;
+}
+
+
+/* --- עיצוב החבילה המומלצת --- */
+.pricing-card.featured {
+    border-color: var(--primary-color);
+    border-width: 2px;
+    transform: scale(1.05); /* מגדיל אותה מעט */
+}
+
+.pricing-card.featured .badge {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 5px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* כדי שההגדלה לא תיראה מוזר במעבר עכבר */
+.pricing-card.featured:hover {
+     transform: scale(1.07);
+}
+
+/* --- עיצוב חלונית "שימו לב" (Notice Box) --- */
+
+.notice-box {
+    padding: 20px;
+    margin: 30px 0; /* רווח מעל ומתחת לחלונית */
+    border-radius: 8px;
+    border-right-width: 5px;
+    border-right-style: solid;
+}
+
+.notice-box h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.notice-box p {
+    margin-bottom: 0;
+}
+
+/* עיצוב חלונית מידע (כחולה) */
+.notice-box.info {
+    background-color: #e7f3ff;
+    border-color: var(--primary-color); /* משתמש בצבע הראשי של האתר */
+    color: #004085;
+}
+
+.notice-box.info h3::before {
+    content: 'ℹ️'; /* אייקון מידע */
+    margin-left: 10px;
+    font-size: 22px;
+}
+
+/* ============================================= */
+/*    התאמות רספונסיביות למסכים קטנים מאוד    */
+/*         (מתחת ל-480px)                     */
+/* ============================================= */
+@media (max-width: 480px) {
+
+    /* --- הקטנת פונטים כללית --- */
+    body {
+        font-size: 15px; /* מקטין מעט את כל הטקסטים באתר */
+    }
+
+    h1, .hero h1 {
+        font-size: 1.8rem; /* הקטנה משמעותית של הכותרת הראשית */
+    }
+
+    h2, .catalog-header h1 {
+        font-size: 1.5rem; /* הקטנת כותרות משנה וכותרות קטלוג */
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+
+    /* --- הקטנת ריווחים כדי לנצל מקום --- */
+    .container {
+        padding: 0 10px; /* פחות ריווח בצדדים */
+    }
+
+    .content-page {
+        padding: 20px 15px; /* פחות ריווח פנימי בדפי תוכן */
+    }
+
+
+    /* --- התאמת ההידר (Header) --- */
+    header .logo {
+        font-size: 20px; /* הקטנת הלוגו */
+    }
+
+    header nav ul li {
+        margin-right: 10px; /* פחות רווח בין פריטי ניווט */
+    }
+    
+    header nav a {
+        font-size: 15px;
+    }
+
+
+    /* --- התאמת אזור ה-Hero --- */
+    .hero {
+        height: auto; /* גובה אוטומטי במקום קבוע */
+        padding: 40px 15px;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+
+    /* --- התאמת כרטיסים וגרידים --- */
+    .firmware-card-content,
+    .pricing-card {
+        padding: 15px; /* פחות ריווח פנימי בכרטיסים השונים */
+    }
+    
+    /* מבטיח שהגריד לא ייצור גלילה אופקית מיותרת */
+    .firmware-grid, .pricing-grid {
+        grid-template-columns: 1fr; /* תמיד עמודה אחת במסכים כאלה */
+        gap: 20px;
+    }
+
+
+    /* --- התאמת טבלת המחירים --- */
+    .pricing-card .price {
+        font-size: 2rem; /* הקטנת גודל המחיר */
+    }
+    
+    .pricing-card.featured {
+        transform: scale(1); /* ביטול ההגדלה של החבילה המומלצת כדי לחסוך מקום */
+    }
+
+    .pricing-card.featured .badge {
+        font-size: 12px;
+        padding: 4px 12px;
+    }
+}
+/* ============================================= */
+/*          תפריט המבורגר למובייל              */
+/* ============================================= */
+
+/* 1. עיצוב כפתור ההמבורגר */
+#hamburger-btn {
+    display: none; /* מוסתר כברירת מחדל (יופיע רק במובייל) */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001; /* חשוב שיהיה מעל הכל */
+}
+
+#hamburger-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--dark-color);
+    margin: 5px 0;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* 2. המדיה קוורי - כאן קורה המעבר לתצוגת מובייל */
+@media (max-width: 768px) {
+    
+    /* הסתרת התפריט הרגיל והצגת כפתור ההמבורגר */
+    nav#main-nav {
+        display: none; /* מסתירים את התפריט הרגיל */
+    }
+
+    #hamburger-btn {
+        display: block; /* מציגים את כפתור ההמבורגר */
+    }
+
+    /* עיצוב התפריט כשהוא פתוח */
+    nav#main-nav.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed; /* נשאר במקום גם בגלילה */
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(5px);
+        padding-top: 80px; /* ריווח מהחלק העליון */
+        align-items: center;
+        z-index: 1000;
+    }
+    
+    /* עיצוב הקישורים בתפריט הפתוח */
+    nav#main-nav.open ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    nav#main-nav.open ul li {
+        margin: 0;
+    }
+
+    nav#main-nav.open a {
+        font-size: 1.5rem; /* פונט גדול וברור */
+        padding: 10px;
+    }
+
+    /* הסתרת תפריט המשנה הנפתח במובייל */
+    nav#main-nav .dropdown .dropbtn {
+        display: none;
+    }
+    
+    nav#main-nav .dropdown-content {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: none;
+        background: none;
+    }
+
+    nav#main-nav .dropdown-content a {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+    }
+}
+
+
+/* 3. אנימציה של ההמבורגר שהופך לאיקס (X) */
+#hamburger-btn.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+#hamburger-btn.open span:nth-child(2) {
+    opacity: 0;
+}
+
+#hamburger-btn.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- הפיכת כל כרטיס המוצר לקישור --- */
+
+/* 
+  מבטל את סגנונות הקישור הדיפולטיביים (צבע וקו תחתון)
+  וגורם לקישור להתנהג כמו ה-div המקורי
+*/
+a.firmware-card {
+    text-decoration: none;
+    color: inherit; /* יורש את צבע הטקסט הרגיל */
+    display: flex; /* חשוב כדי לשמור על מבנה הכרטיס */
+    flex-direction: column;
+}
+
+/* 
+  עיצוב לטקסט ה-"פרטים נוספים" שהפך ל-span,
+  כדי שייראה בדיוק כמו הקישור המקורי
+*/
+.card-link-text {
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+    align-self: flex-start;
+    margin-top: auto; /* דוחף את הטקסט לתחתית הכרטיס */
+}
+
+/* 
+  בגלל שה-flex-grow היה על התוכן, נוסיף אותו מחדש
+  כדי לשמור על גובה אחיד של הכרטיסים
+*/
+a.firmware-card .firmware-card-content {
+    flex-grow: 1;
+}
+
+/* ============================================= */
+/*             פתרון ל-Footer "דביק"             */
+/* ============================================= */
+
+/* 1. הופכים את גוף הדף למיכל Flexbox אנכי */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* מבטיח שה-body יתפוס לפחות את כל גובה המסך */
+}
+
+/* 
+  2. נותנים לחלק המרכזי של האתר הוראה "לצמוח"
+     ולתפוס את כל השטח הפנוי שנותר.
+     זה מה שדוחף את ה-Footer כלפי מטה.
+*/
+main {
+    flex-grow: 1;
+}

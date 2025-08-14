@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- הכותרת תשתנה דינמית על ידי JavaScript -->
+    <title>קטלוג - Buy ROM</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ההידר החדש עם הקישורים לקטלוגים - יופיע בכל הדפים -->
+    <header>
+        <div class="container">
+            <div class="logo"><a href="index.html">Buy ROM</a></div>
+            <nav id="main-nav">
+                <ul>
+                   <li><a href="index.html">דף הבית</a></li>
+                    <li><a href="media-player.html">נגנים</a></li>
+                    <li><a href="mobile.html">טלפונים</a></li>
+                    <li><a href="mtk.html">MTK</a></li>
+                    <li><a href="qualcomm.html">qualcomm</a></li>
+                    <li><a href="app.html">אפליקציות</a></li>
+                    <li><a href="services.html">שירותים</a></li>
+                    <li><a href="about.html">אודות</a></li>
+                </ul>
+            </nav>
+              <!-- כפתור ההמבורגר - יופיע רק במובייל -->
+        <button id="hamburger-btn" aria-label="תפריט ניווט">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- כותרת הקטגוריה ושורת החיפוש -->
+            <div class="catalog-header">
+                <h1 id="catalog-title">טוען קטלוג...</h1>
+                <div class="search-container">
+                    <input type="search" id="search-box" placeholder="חפש בקטלוג זה...">
+                </div>
+            </div>
+
+            <!-- המוצרים יוצגו כאן באופן דינמי על ידי JavaScript -->
+            <div id="product-grid" class="firmware-grid">
+                <!-- לדוגמה: <div class="firmware-card">...</div> -->
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+    <div class="container">
+        <p>&copy; 2025 כל הזכויות שמורות - Buy ROM | <a href="about.html#accessibility" style="color: white;">הצהרת נגישות</a></p>
+    </div>
+</footer>
+
+    <!-- קישור לקבצי ה-JS -->
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+     <script src="js/menu.js" defer></script>
+
+</body>
+</html>

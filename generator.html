@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>מחולל דפי מוצר (גרסה מלאה) - Buy ROM</title>
+    <style>
+        :root { --primary-color: #007bff; --dark-color: #343a40; --light-color: #f8f9fa; --border-color: #dee2e6; }
+        body { direction: rtl; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #e9ecef; margin: 0; }
+        .editor-layout { display: flex; height: 100vh; }
+        .form-panel { width: 50%; padding: 25px; background: white; overflow-y: auto; border-left: 1px solid var(--border-color); }
+        .preview-panel { width: 50%; padding: 20px; background-color: var(--light-color); display: flex; flex-direction: column; align-items: center; }
+        h1, h2 { text-align: center; color: var(--primary-color); border-bottom: 2px solid var(--light-color); padding-bottom: 10px; }
+        h2 { font-size: 1.5em; margin-top: 30px; }
+        label { display: block; margin-top: 15px; font-weight: 600; color: #495057; }
+        input[type="text"], input[type="number"], textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box; font-size: 1em; }
+        textarea { min-height: 80px; resize: vertical; }
+        .info { font-size: 0.9em; color: #6c757d; margin-top: 4px; }
+        button { display: block; width: 100%; padding: 12px; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; margin-top: 25px; transition: background-color 0.2s; }
+        .copy-btn { background-color: #28a745; color: white; margin-top: 10px; }
+        .copy-btn:hover { background-color: #218838; }
+        .save-btn { background-color: #17a2b8; color: white; }
+        .save-btn:hover { background-color: #138496; }
+        #preview-frame { width: 100%; height: 100%; border: 1px solid var(--border-color); background: white; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .output-section { margin-top: 30px; border-top: 2px solid var(--light-color); padding-top: 20px; }
+        .output-code { width: 100%; min-height: 150px; background: #2d3e50; color: #f8f8f2; font-family: monospace; padding: 15px; border-radius: 5px; direction: ltr; text-align: left; }
+        .bold-tip { background-color: #fff3cd; border: 1px solid #ffeeba; padding: 10px; border-radius: 4px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<textarea id="page-template" style="display: none;">
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>__PAGE_TITLE__</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo"><a href="index.html">Buy ROM</a></div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html">דף הבית</a></li>
+                    <li><a href="media-player.html">נגנים</a></li>
+                    <li><a href="mobile.html">טלפונים</a></li>
+                    <li><a href="mtk.html">MTK</a></li>
+                    <li><a href="qualcomm.html">qualcomm</a></li>
+                    <li><a href="app.html">אפליקציות</a></li>
+                    <li><a href="services.html">שירותים</a></li>
+                    <li><a href="about.html">אודות</a></li>
+                </ul>
+            </nav>
+            <button id="hamburger-btn" aria-label="תפריט ניווט"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+    <main>
+        <div class="container content-page">
+            <div class="firmware-page-layout">
+                <div class="firmware-media">
+                    <img src="images/__MAIN_IMAGE__" alt="__PRODUCT_NAME_FULL__" class="main-firmware-image">
+                    <div class="thumbnail-gallery">
+                        <h3>גלריית תמונות</h3>
+                        <div class="thumbnail-grid">__GALLERY_IMAGES__</div>
+                    </div>
+                </div>
+                <div class="firmware-details">
+                    <h1>__PRODUCT_NAME_FULL__</h1>
+                    <div class="price">₪__PRICE__</div>
+                    <h3>תכונות מרכזיות</h3>
+                    <ul>__FEATURES__</ul>
+                    <h3>תאימות מכשירים</h3>
+                    <ul>__COMPATIBILITY__</ul>
+                    <a href="__MAIN_PURCHASE_LINK__" class="cta-button">לרכישה ופרטים נוספים</a>
+                </div>
+            </div>
+            <div id="pricing" class="pricing-section">
+                <h2>בחר את החבילה המתאימה לך</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>__PKG1_NAME__</h3>
+                        <div class="price">₪__PKG1_PRICE__ <span>/ חד פעמי</span></div>
+                        <p>__PKG1_DESC__</p>
+                        <ul>__PKG1_FEATURES__</ul>
+                    </div>
+                    <div class="pricing-card featured">
+                        <div class="badge">מומלץ</div>
+                        <h3>__PKG2_NAME__</h3>
+                        <div class="price">₪__PKG2_PRICE__ <span>/ חד פעמי</span></div>
+                        <p>__PKG2_DESC__</p>
+                        <ul>__PKG2_FEATURES__</ul>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>__PKG3_NAME__</h3>
+                        <div class="price">₪__PKG3_PRICE__ <span>/ חד פעמי</span></div>
+                        <p>__PKG3_DESC__</p>
+                        <ul>__PKG3_FEATURES__</ul>
+                    </div>
+                </div>
+            </div>
+            <div class="extra-info-section">
+                <h2>__NOTES_TITLE__</h2>
+                <ul>__NOTES_CONTENT__</ul>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 כל הזכויות שמורות - Buy ROM | <a href="about.html#accessibility" style="color: white;">הצהרת נגישות</a></p>
+        </div>
+    </footer>
+    <script src="js/gallery.js" defer></script>
+    <script src="js/menu.js" defer></script>
+</body>
+</html>
+</textarea>
+
+
+<div class="editor-layout">
+
+    <aside class="preview-panel">
+        <h2>תצוגה מקדימה חיה</h2>
+        <iframe id="preview-frame"></iframe>
+    </aside>
+
+    <main class="form-panel">
+        <h1>מחולל דפי מוצר</h1>
+        <form id="product-form">
+            <h2>פרטים ראשיים (עבור קטלוג וחיפוש)</h2>
+            <label for="product-name-short">שם מוצר קצר (יוצג בקטלוג):</label>
+            <input type="text" id="product-name-short" placeholder="קושחת 'Velocity' לדגם X">
+
+            <label for="product-desc-short">תיאור קצר (יוצג בקטלוג):</label>
+            <input type="text" id="product-desc-short" placeholder="חווית שימוש חלקה ומהירה יותר.">
+            
+            <label for="categories">קטגוריות (מופרדות בפסיק):</label>
+            <input type="text" id="categories" placeholder="snapdragon, mobile">
+            <p class="info">לדוגמה: mtk, mobile, media-player</p>
+
+            <h2>פרטי דף המוצר</h2>
+            <label for="page-title">כותרת הדף (לשונית הדפדפן):</label>
+            <input type="text" id="page-title" placeholder="קושחת Velocity - Buy ROM">
+            
+            <label for="product-name-full">כותרת ראשית בדף (H1):</label>
+            <input type="text" id="product-name-full" placeholder="קושחת 'Velocity' משופרת לדגם X">
+
+            <label for="main-purchase-link">קישור רכישה ראשי:</label>
+            <input type="text" id="main-purchase-link" placeholder="https://example.com/buy/product-id">
+
+            <label for="price">מחיר ראשי (של החבילה המומלצת):</label>
+            <input type="number" id="price" placeholder="25">
+
+            <label for="main-image">שם קובץ התמונה הראשית:</label>
+            <input type="text" id="main-image" placeholder="placeholder.png">
+
+            <div class="bold-tip">💡 **טיפ:** להדגשת שורה, הקף אותה ב-`**`</div>
+            <label for="features">תכונות מרכזיות:</label>
+            <textarea id="features">**ביצועים משופרים**</textarea>
+
+            <label for="compatibility">תאימות מכשירים:</label>
+            <textarea id="compatibility">דגם X (XT-1234)</textarea>
+
+            <h2>גלריית תמונות</h2>
+            <label for="gallery-images">שמות קבצי התמונות (כל שם בשורה):</label>
+            <textarea id="gallery-images">m303pro_1.png</textarea>
+            
+            <!-- חבילות וכו' -->
+            <h2>חבילות שירות</h2>
+            <h3>חבילה 1 (ימין)</h3>
+            <input type="text" id="pkg1-name" placeholder="חבילת בסיס"><br>
+            <input type="text" id="pkg1-price" placeholder="15"><br>
+            <input type="text" id="pkg1-desc" placeholder="הקושחה הבסיסית."><br>
+            <textarea id="pkg1-features">קובץ הקושחה</textarea>
+            <h3>חבילה 2 (אמצע - מומלצת)</h3>
+            <input type="text" id="pkg2-name" placeholder="חבילת פרימיום"><br>
+            <input type="text" id="pkg2-price" placeholder="25"><br>
+            <input type="text" id="pkg2-desc" placeholder="החבילה המלאה."><br>
+            <textarea id="pkg2-features">**כולל כל המחיצות**</textarea>
+            <h3>חבילה 3 (שמאל)</h3>
+            <input type="text" id="pkg3-name" placeholder="חבילת רוט"><br>
+            <input type="text" id="pkg3-price" placeholder="10"><br>
+            <input type="text" id="pkg3-desc" placeholder="קבצים לביצוע רוט."><br>
+            <textarea id="pkg3-features">קובץ boot.img</textarea>
+            <h2>הערות חשובות</h2>
+            <input type="text" id="notes-title" value="הערות לפני הצריבה"><br>
+            <textarea id="notes-content">**גיבוי חובה!**</textarea>
+        </form>
+        
+        <div class="output-section">
+            <h2>1. שמירת קובץ ה-HTML</h2>
+            <p class="info">הכנס שם לקובץ (באנגלית, ללא רווחים) ולחץ לשמירה.</p>
+            <input type="text" id="save-filename" placeholder="למשל: velocity-rom-for-model-x.html">
+            <button id="save-btn" class="save-btn">שמור כקובץ HTML</button>
+        </div>
+
+        <div class="output-section">
+            <h2>2. קוד להדבקה ב- `js/products.js`</h2>
+            <textarea id="output-js-code" class="output-code" readonly></textarea>
+            <button id="copy-js-btn" class="copy-btn">העתק את קוד ה-JS</button>
+        </div>
+    </main>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('product-form');
+    const previewFrame = document.getElementById('preview-frame');
+    const outputJsCode = document.getElementById('output-js-code');
+    const copyJsBtn = document.getElementById('copy-js-btn');
+    const saveFilenameInput = document.getElementById('save-filename');
+    const saveBtn = document.getElementById('save-btn');
+    const templateTextarea = document.getElementById('page-template');
+
+    function processTextToList(text) {
+        if (!text) return '';
+        return text.split('\n').filter(line => line.trim() !== '').map(line => `<li>${line.trim().replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</li>`).join('\n');
+    }
+
+    function generateGallery(text) {
+        if (!text) return '';
+        return text.split('\n').filter(line => line.trim() !== '').map(line => `<a href="images/${line.trim()}"><img src="images/${line.trim()}" alt="תמונה מהגלריה"></a>`).join('\n');
+    }
+
+    function updateAll() {
+        let finalHtml = templateTextarea.value;
+        const data = {
+            pageTitle: document.getElementById('page-title').value,
+            productNameFull: document.getElementById('product-name-full').value,
+            price: document.getElementById('price').value,
+            mainImage: document.getElementById('main-image').value,
+            features: processTextToList(document.getElementById('features').value),
+            compatibility: processTextToList(document.getElementById('compatibility').value),
+            galleryImages: generateGallery(document.getElementById('gallery-images').value),
+            pkg1: { name: document.getElementById('pkg1-name').value, price: document.getElementById('pkg1-price').value, desc: document.getElementById('pkg1-desc').value, features: processTextToList(document.getElementById('pkg1-features').value) },
+            pkg2: { name: document.getElementById('pkg2-name').value, price: document.getElementById('pkg2-price').value, desc: document.getElementById('pkg2-desc').value, features: processTextToList(document.getElementById('pkg2-features').value) },
+            pkg3: { name: document.getElementById('pkg3-name').value, price: document.getElementById('pkg3-price').value, desc: document.getElementById('pkg3-desc').value, features: processTextToList(document.getElementById('pkg3-features').value) },
+            notesTitle: document.getElementById('notes-title').value,
+            notesContent: processTextToList(document.getElementById('notes-content').value),
+            mainPurchaseLink: document.getElementById('main-purchase-link').value || '#'
+        };
+
+        for (const key in data) {
+            if (typeof data[key] === 'object' && data[key] !== null) {
+                for (const subKey in data[key]) {
+                    finalHtml = finalHtml.replace(new RegExp(`__PKG${key.slice(-1)}_${subKey.toUpperCase()}__`, 'g'), data[key][subKey]);
+                }
+            } else {
+                finalHtml = finalHtml.replace(new RegExp(`__${key.replace(/([A-Z])/g, '_$1').toUpperCase()}__`, 'g'), data[key]);
+            }
+        }
+        finalHtml = finalHtml.replace(/__MAIN_PURCHASE_LINK__/g, data.mainPurchaseLink);
+        
+        previewFrame.srcdoc = finalHtml;
+        
+        // --- יצירת קוד ה-JS ---
+        const productNameShort = document.getElementById('product-name-short').value;
+        const productDescShort = document.getElementById('product-desc-short').value;
+        const mainImageShort = document.getElementById('main-image').value;
+        const priceShort = document.getElementById('price').value;
+        const categoriesRaw = document.getElementById('categories').value;
+        const pageUrl = saveFilenameInput.value.trim() || 'שם-הקובץ.html';
+
+        const categoriesArray = categoriesRaw.split(',').map(cat => `'${cat.trim()}'`).join(', ');
+
+        const jsSnippet = `{
+    id: ${Date.now()},
+    name: '${productNameShort.replace(/'/g, "\\'")}',
+    description: '${productDescShort.replace(/'/g, "\\'")}',
+    price: ${priceShort},
+    image: 'images/${mainImageShort}',
+    pageUrl: '${pageUrl}',
+    categories: [${categoriesArray}]
+},`;
+        outputJsCode.value = jsSnippet;
+    }
+
+    form.addEventListener('input', updateAll);
+    saveFilenameInput.addEventListener('input', updateAll);
+    updateAll(); 
+
+    copyJsBtn.addEventListener('click', () => {
+        outputJsCode.select();
+        navigator.clipboard.writeText(outputJsCode.value).then(() => { alert('קוד ה-JS הועתק בהצלחה!'); });
+    });
+
+    saveBtn.addEventListener('click', () => {
+        let filename = saveFilenameInput.value.trim();
+        if (!filename) {
+            alert('אנא הכנס שם לקובץ.');
+            return;
+        }
+        if (!filename.endsWith('.html')) {
+            filename += '.html';
+        }
+        
+        const finalHtml = previewFrame.srcdoc;
+        const blob = new Blob([finalHtml], { type: 'text/html;charset=utf-8' });
+        
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(link.href);
+    });
+});
+</script>
+
+</body>
+</html>```
